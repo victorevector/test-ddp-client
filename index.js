@@ -1,8 +1,10 @@
+require('dotenv').config();
 const DDPClient = require("ddp");
 const readline = require("readline");
-const EMAIL = "victor@treestack.io";
-const PASSWORD = "xawcym-9mukze-fubwaS";
-const URL = "ws://localhost:3000/websocket";
+const EMAIL = process.env.EMAIL;
+const PASSWORD = process.env.PASSWORD;
+const URL = process.env.URL;
+const REPORTID = process.env.REPORTID;
 
 
 // read from terminal 
@@ -33,7 +35,7 @@ ddpclient.connect((error, wasReconnect) => {
 
     login(ddpclient, EMAIL, PASSWORD);
 
-    triggerCallMethod(rl, () => callExportMethod(ddpclient) );
+    triggerCallMethod(rl, () => callExportMethod(ddpclient, REPORTID) );
 });
 
 
@@ -48,10 +50,10 @@ function login(client, username, password) {
     });
 }
 
-function callExportMethod(client) {
+function callExportMethod(client, reportId) {
     client.call(
-        "reports.test.doc",
-        ["This is a parameter"],
+        "reports.test.gdoc",
+        [reportId],
         (err, result) => {
             if (err) {
                 console.log("export method called. ERROR", err);
