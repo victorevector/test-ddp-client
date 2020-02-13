@@ -2,6 +2,7 @@ const DDPClient = require("ddp");
 const readline = require("readline");
 const EMAIL = "victor@treestack.io";
 const PASSWORD = "xawcym-9mukze-fubwaS";
+const URL = "ws://localhost:3000/websocket";
 
 
 // read from terminal 
@@ -16,7 +17,7 @@ const ddpclient = new DDPClient({
     autoReconnect: true, 
     autoReconnectTimer: 500,
     ddpVersion: '1',
-    url: "ws://localhost:3000/websocket"
+    url: URL
 });
 
 // establish a connection 
